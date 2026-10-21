@@ -28,6 +28,8 @@ curl http://127.0.0.1:8080/monitor.log
 |---|---|---|
 | [deploy/nginx/my-app.conf](deploy/nginx/my-app.conf) | `/etc/nginx/sites-available/my-app` | reverse proxy на 127.0.0.1:8080, TLS, редирект 80 → 443 |
 | [deploy/systemd/my-app.service](deploy/systemd/my-app.service) | `/etc/systemd/system/my-app.service` | автозапуск контейнера `my-app` после Docker |
+| [deploy/storage/storage-up.sh](deploy/storage/storage-up.sh) | `/usr/local/sbin/storage-up.sh` | после ребута заново подключает loop-устройства, собирает RAID 1, активирует LVM и монтирует `/mnt/raid`, `/mnt/logs` |
+| [deploy/systemd/storage-up.service](deploy/systemd/storage-up.service) | `/etc/systemd/system/storage-up.service` | запускает `storage-up.sh` при загрузке |
 
 Сертификат самоподписанный:
 

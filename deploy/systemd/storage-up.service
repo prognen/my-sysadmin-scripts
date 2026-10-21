@@ -1,0 +1,14 @@
+# /etc/systemd/system/storage-up.service
+# Восстанавливает RAID 1 (/mnt/raid) и LVM (/mnt/logs) на loop-устройствах при загрузке
+
+[Unit]
+Description=Lab RAID 1 and LVM on loop devices
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/storage-up.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
