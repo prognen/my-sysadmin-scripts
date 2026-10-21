@@ -1,0 +1,60 @@
+$ MAX_ITERATIONS=3 ./script.sh
+Мониторинг запущен: интервал 10 с, лог: monitor.log, PID 2502
+Готово: снимков 3, лог: monitor.log
+
+$ cat monitor.log
+--- 2026-10-21 12:53:40 ---
+[free -h]
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       217Mi       905Mi       0.0Ki       775Mi       1.5Gi
+Swap:             0B          0B          0B
+[df -h]
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           190M  940K  189M   1% /run
+/dev/sda1       9.6G  1.9G  7.7G  20% /
+tmpfs           950M     0  950M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/sda15      105M  6.1M   99M   6% /boot/efi
+tmpfs           190M  4.0K  190M   1% /run/user/1000
+[uptime]
+ 12:53:40 up 8 min,  1 user,  load average: 0.00, 0.03, 0.03
+
+--- 2026-10-21 12:53:50 ---
+[free -h]
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       217Mi       905Mi       0.0Ki       775Mi       1.5Gi
+Swap:             0B          0B          0B
+[df -h]
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           190M  932K  189M   1% /run
+/dev/sda1       9.6G  1.9G  7.7G  20% /
+tmpfs           950M     0  950M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/sda15      105M  6.1M   99M   6% /boot/efi
+tmpfs           190M  4.0K  190M   1% /run/user/1000
+[uptime]
+ 12:53:50 up 9 min,  1 user,  load average: 0.00, 0.03, 0.03
+
+--- 2026-10-21 12:54:00 ---
+[free -h]
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       217Mi       905Mi       0.0Ki       775Mi       1.5Gi
+Swap:             0B          0B          0B
+[df -h]
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           190M  932K  189M   1% /run
+/dev/sda1       9.6G  1.9G  7.7G  20% /
+tmpfs           950M     0  950M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/sda15      105M  6.1M   99M   6% /boot/efi
+tmpfs           190M  4.0K  190M   1% /run/user/1000
+[uptime]
+ 12:54:00 up 9 min,  1 user,  load average: 0.00, 0.03, 0.02
+
+# Обработка ошибок:
+$ MAX_ITERATIONS=abc ./script.sh
+ОШИБКА: MAX_ITERATIONS должно быть целым числом >= 0, получено 'abc'
+$ LOG_FILE=/nope/x.log ./script.sh
+ОШИБКА: каталог '/nope' для лога не существует
+$ LOG_FILE=/etc/x.log ./script.sh
+ОШИБКА: нет прав на запись в '/etc/x.log'
