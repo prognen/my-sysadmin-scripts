@@ -1,0 +1,10 @@
+services:
+  monitor:
+    build: .
+    image: my-script
+    command: ["/usr/local/bin/script.sh"]   # только скрипт, без HTTP-сервера
+    environment:
+      MAX_ITERATIONS: "2"                   # два снимка и выход
+      LOG_FILE: /dev/stdout                 # снимки сразу в вывод контейнера
+    volumes:
+      - /etc/localtime:/etc/localtime:ro    # время хоста, а не UTC
