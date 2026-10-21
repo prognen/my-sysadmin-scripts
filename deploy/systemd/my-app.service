@@ -1,7 +1,9 @@
 # /etc/systemd/system/my-app.service
 # Контейнер создаётся один раз:
-#   docker run -d -p 127.0.0.1:8080:8080 --name my-app \
+#   docker run -d --init -p 127.0.0.1:8080:8080 --name my-app \
 #     -v /etc/localtime:/etc/localtime:ro my-script
+# --init: PID 1 в контейнере — tini, он передаёт SIGTERM в python,
+# иначе docker stop ждёт 10 с и убивает контейнер через SIGKILL
 
 [Unit]
 Description=my-app service
@@ -11,6 +13,8 @@ Requires=docker.service
 [Service]
 ExecStart=/usr/bin/docker start -a my-app
 ExecStop=/usr/bin/docker stop my-app
+# 143 = завершение по SIGTERM, штатная остановка, а не сбой
+SuccessExitStatus=143
 Restart=on-failure
 
 [Install]

@@ -15,7 +15,7 @@ MAX_ITERATIONS=3 ./script.sh    # 3 снимка и выход
 
 ```bash
 docker build -t my-script .
-docker run -d -p 127.0.0.1:8080:8080 --name my-app \
+docker run -d --init -p 127.0.0.1:8080:8080 --name my-app \
   -v /etc/localtime:/etc/localtime:ro my-script
 curl http://127.0.0.1:8080/monitor.log
 ```
