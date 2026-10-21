@@ -1,0 +1,17 @@
+# /etc/systemd/system/my-app.service
+# Контейнер создаётся один раз:
+#   docker run -d -p 127.0.0.1:8080:8080 --name my-app \
+#     -v /etc/localtime:/etc/localtime:ro my-script
+
+[Unit]
+Description=my-app service
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker start -a my-app
+ExecStop=/usr/bin/docker stop my-app
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
